@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin:'com.novoda.bintray-release'//添加
+
+android {
+    compileSdkVersion 26
+
+
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+}
+
+//添加
+publish {
+    userOrg = 'ifadai'//bintray.com用户名
+    groupId = 'com.ifadai'//jcenter上的路径
+    artifactId = 'particlesmasher'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Particle smash animation for Android'//描述，不重要
+    website = 'https://github.com/ifadai/ParticleSmasher'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+}
