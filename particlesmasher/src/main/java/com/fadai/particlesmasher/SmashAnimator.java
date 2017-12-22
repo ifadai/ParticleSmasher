@@ -62,7 +62,7 @@ public class SmashAnimator {
 
     // 加速度插值器
     private static final Interpolator DEFAULT_INTERPOLATOR = new AccelerateInterpolator(0.6f);
-    private OnExplosionListener mOnExplosionListener;
+    private OnAnimatorListener mOnAnimatorLIstener;
 
     public SmashAnimator(ParticleSmasher view, View animatorView) {
         this.mContainer = view;
@@ -92,18 +92,18 @@ public class SmashAnimator {
     /**
      *   爆炸动画回调事件
      */
-    public static abstract class OnExplosionListener {
+    public static abstract class OnAnimatorListener {
 
         /**
          * 动画开始时回调
          */
-        public void onExplosionStart() {
+        public void onAnimatorStart() {
         }
 
         /**
          * 动画结束后回调
          */
-        public void onExplosionEnd() {
+        public void onAnimatorEnd() {
         }
 
     }
@@ -176,8 +176,8 @@ public class SmashAnimator {
      *   @param listener   回调事件，包含开始回调、结束回调。
      *   @return      链式调用，因此返回本身
      */
-    public SmashAnimator addExplosionListener(final OnExplosionListener listener) {
-        this.mOnExplosionListener = listener;
+    public SmashAnimator addAnimatorListener(final OnAnimatorListener listener) {
+        this.mOnAnimatorLIstener = listener;
         return this;
     }
 
@@ -201,16 +201,16 @@ public class SmashAnimator {
         mValueAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (mOnExplosionListener != null) {
-                    mOnExplosionListener.onExplosionEnd();
+                if (mOnAnimatorLIstener != null) {
+                    mOnAnimatorLIstener.onAnimatorEnd();
                 }
                 mContainer.removeAnimator(SmashAnimator.this);
             }
 
             @Override
             public void onAnimationStart(Animator animation) {
-                if (mOnExplosionListener != null) {
-                    mOnExplosionListener.onExplosionStart();
+                if (mOnAnimatorLIstener != null) {
+                    mOnAnimatorLIstener.onAnimatorStart();
                 }
 
             }

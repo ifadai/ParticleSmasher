@@ -59,9 +59,9 @@ public class ParticleSmasher extends View {
 
     public SmashAnimator with(View view) {
         // 每次都新建一个单独的SmashAnimator对象
-        SmashAnimator explosion = new SmashAnimator(this, view);
-        mAnimators.add(explosion);
-        return explosion;
+        SmashAnimator animator = new SmashAnimator(this, view);
+        mAnimators.add(animator);
+        return animator;
     }
 
 

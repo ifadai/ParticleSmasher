@@ -57,11 +57,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.iv_main_2:
                 mSmasher.with(view)
-                        .setStyle(SmashAnimator.STYLE_DROP)
-                        .setHorizontalMultiple(2)
-                        .setVerticalMultiple(2)
-                        .setDuration(1500)
-                        .setStartDelay(300)
+                        .setStyle(SmashAnimator.STYLE_DROP)    // 设置动画样式
+                        .setDuration(1500)                     // 设置动画时间
+                        .setStartDelay(300)                    // 设置动画前延时
+                        .setHorizontalMultiple(2)              // 设置横向运动幅度
+                        .setVerticalMultiple(2)                // 设置竖向运动幅度
+                        .addAnimatorListener(new SmashAnimator.OnAnimatorListener() {
+                            @Override
+                            public void onAnimatorStart() {
+                                super.onAnimatorStart();
+                                // 回调，动画开始
+                            }
+
+                            @Override
+                            public void onAnimatorEnd() {
+                                super.onAnimatorEnd();
+                                // 回调，动画结束
+                            }
+                        })
                         .start();
                 break;
             case R.id.iv_main_3:
@@ -102,10 +115,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mSmasher.with(view)
                         .setVerticalMultiple(9)
                         .setHorizontalMultiple(3)
-                        .addExplosionListener(new SmashAnimator.OnExplosionListener() {
+                        .addAnimatorListener(new SmashAnimator.OnAnimatorListener() {
                             @Override
-                            public void onExplosionEnd() {
-                                super.onExplosionEnd();
+                            public void onAnimatorEnd() {
+                                super.onAnimatorEnd();
                                 mSmasher.reShowView(view);
                                 Toast.makeText(MainActivity.this, "动画结束", Toast.LENGTH_LONG).show();
                             }
@@ -117,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void reset() {
+        // 让View重新显示
         mSmasher.reShowView(mIv1);
         mSmasher.reShowView(mIv2);
         mSmasher.reShowView(mIv3);

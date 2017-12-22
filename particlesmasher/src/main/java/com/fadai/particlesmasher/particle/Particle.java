@@ -31,7 +31,4 @@ public abstract class Particle {
 
     public void advance(float factor, float endValue) {
     }
-
-    ;
-
 }
